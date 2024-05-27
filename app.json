@@ -2,6 +2,11 @@
   "expo": {
     "name": "AndroidChatApp",
     "slug": "AndroidChatApp",
-    "version": "1.0.0"
+    "version": "1.0.0",
+    "extra": {
+      "eas": {
+        "projectId": "b92e130a-9c1c-4627-9d00-6f98223aa03e"
+      }
+    }
   }
 }
