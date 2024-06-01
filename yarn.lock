@@ -241,7 +241,7 @@
   resolved "https://registry.npmjs.org/@babel/helper-string-parser/-/helper-string-parser-7.24.6.tgz"
   integrity sha512-WdJjwMEkmBicq5T9fm/cHND3+UlFa2Yj8ALLgmoSQAJZysYbBjw+azChSGPN4DSPLXOcooGRvDwZWMcF/mLO2Q==
 
-"@babel/helper-validator-identifier@^7.16.7", "@babel/helper-validator-identifier@^7.18.6", "@babel/helper-validator-identifier@^7.24.6":
+"@babel/helper-validator-identifier@^7.18.6", "@babel/helper-validator-identifier@^7.24.6":
   version "7.24.6"
   resolved "https://registry.npmjs.org/@babel/helper-validator-identifier/-/helper-validator-identifier-7.24.6.tgz"
   integrity sha512-4yA7s865JHaqUdRbnaxarZREuPTHrjpDT+pXoAZ1yhyo6uFnIEpS8VMu16siFOHDpZNKYv5BObhsB//ycbICyw==
@@ -1225,14 +1225,6 @@
   dependencies:
     "@babel/helper-string-parser" "^7.24.6"
     "@babel/helper-validator-identifier" "^7.24.6"
-    to-fast-properties "^2.0.0"
-
-"@babel/types@7.18.2":
-  version "7.18.2"
-  resolved "https://registry.npmjs.org/@babel/types/-/types-7.18.2.tgz"
-  integrity sha512-0On6B8A4/+mFUto5WERt3EEuG1NznDirvwca1O8UwXQHVY8g3R7OzYgxXdOfMwLO08UrpUD/2+3Bclyq+/C94Q==
-  dependencies:
-    "@babel/helper-validator-identifier" "^7.16.7"
     to-fast-properties "^2.0.0"
 
 "@egjs/hammerjs@^2.0.17":
@@ -6630,10 +6622,10 @@ react-is@^17.0.1:
     lodash "^4.17.21"
     prop-types "^15.7.2"
 
-react-native-reanimated@^3.11.0:
-  version "3.11.0"
-  resolved "https://registry.npmjs.org/react-native-reanimated/-/react-native-reanimated-3.11.0.tgz"
-  integrity sha512-BNw/XDgUfs8UhfY1X6IniU8kWpnotWGyt8qmQviaHisTi5lvwnaOdXQKfN1KGONx6ekdFRHRP5EFwLi0UajwKA==
+react-native-reanimated@^3.10.1:
+  version "3.10.1"
+  resolved "https://registry.npmjs.org/react-native-reanimated/-/react-native-reanimated-3.10.1.tgz"
+  integrity sha512-sfxg6vYphrDc/g4jf/7iJ7NRi+26z2+BszPmvmk0Vnrz6FL7HYljJqTf531F1x6tFmsf+FEAmuCtTUIXFLVo9w==
   dependencies:
     "@babel/plugin-transform-arrow-functions" "^7.0.0-0"
     "@babel/plugin-transform-nullish-coalescing-operator" "^7.0.0-0"
@@ -7513,22 +7505,6 @@ supports-preserve-symlinks-flag@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npmjs.org/supports-preserve-symlinks-flag/-/supports-preserve-symlinks-flag-1.0.0.tgz"
   integrity sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==
-
-tailwindcss-react-native@^1.7.10:
-  version "1.7.10"
-  resolved "https://registry.npmjs.org/tailwindcss-react-native/-/tailwindcss-react-native-1.7.10.tgz"
-  integrity sha512-Vw1MsIQ6owW5k5sOtNscEOuRjbKds7mkD6Wi2B92hq8JmcphG+ke8xsViP2PpMKDQ2tXP8SBunax2pmC7yx5lQ==
-  dependencies:
-    "@babel/types" "7.18.2"
-    css-mediaquery "^0.1.2"
-    css-to-react-native "^3.0.0"
-    micromatch "^4.0.5"
-    postcss "^8.4.12"
-    postcss-calc "^8.2.4"
-    postcss-color-functional-notation "^4.2.2"
-    postcss-css-variables "^0.18.0"
-    postcss-nested "^5.0.6"
-    react-is "^18.1.0"
 
 tailwindcss@~3, tailwindcss@3.3.2:
   version "3.3.2"
