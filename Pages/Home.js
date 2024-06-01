@@ -3,7 +3,7 @@ import React from 'react'
 
 export default function Home() {
   return (
-    <View>
+    <View className='flex-1 '>
       <Text>Home</Text>
     </View>
   )
