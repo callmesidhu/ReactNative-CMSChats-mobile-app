@@ -1,24 +1,22 @@
 import React from 'react'
 import { View, Text, TextInput, TouchableOpacity } from 'react-native'
 import { StatusBar } from 'expo-status-bar'
-import Animated,{ FadeInDown, FadeInUp, StretchInY } from 'react-native-reanimated';
+import Animated,{ FadeInDown, FadeInUp} from 'react-native-reanimated';
 import { useNavigation } from '@react-navigation/native';
-
-
-
 
 function SignUp(){
 
   const navigation = useNavigation();
+
   return (
     <View className='flex-1'>
 
       <StatusBar style='light'/>
       <Animated.Image entering={FadeInUp.delay(100).duration(300)} className='flex-1 w-full h-[100%] absolute' source={require('../Resources/background.png')}  resizeMode="cover"/>
-      <View className='flex-row justify-around pr-3.5 absolute w-full'>
-        <Animated.Image entering={FadeInUp.delay(800).duration(1000).springify()} className='h-[200] w-[80]' source={require('../Resources/light.png')}/> 
-        <Animated.Image entering={FadeInUp.delay(1400).duration(2000).springify()} className='h-[260] w-[100] ' source={require('../Resources/light.png')}/>
-        <Animated.Image entering={FadeInUp.delay(1000).duration(1000).springify()} className='h-[160] w-[65] ' source={require('../Resources/light.png')}/>
+      <View className='flex-row justify-around pl-5 absolute w-full'>
+        <Animated.Image entering={FadeInUp.delay(1000).duration(1000).springify()} className='h-[200] w-[80]' source={require('../Resources/light.png')}/> 
+       <Animated.Image entering={FadeInUp.delay(800).duration(1000).springify()} className='h-[160] w-[65] ' source={require('../Resources/light.png')}/>
+       <Animated.Image entering={FadeInUp.delay(1400).duration(2000).springify()} className='h-[260] w-[100] ' source={require('../Resources/light.png')}/>
       </View>
 
       <View className='h-full w-full flex pt-32 pb-10 items-center'>

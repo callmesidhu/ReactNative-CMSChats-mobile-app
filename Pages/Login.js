@@ -4,11 +4,9 @@ import { StatusBar } from 'expo-status-bar'
 import Animated,{ FadeInDown, FadeInUp} from 'react-native-reanimated';
 import { useNavigation } from '@react-navigation/native';
 
-
-
-
 function Login(){
   const navigation = useNavigation();
+  
   return (
     <View className='flex-1'>
 
