@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, TextInput, TouchableOpacity } from 'react-native'
+import { View, Text, TextInput, TouchableOpacity, Alert} from 'react-native'
 import { StatusBar } from 'expo-status-bar'
 import Animated,{ FadeInDown, FadeInUp} from 'react-native-reanimated';
 import { useNavigation } from '@react-navigation/native';
@@ -8,7 +8,7 @@ import { useState } from 'react';
 
 
 function SignUp(){
-
+  const navigation = useNavigation();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -17,22 +17,17 @@ function SignUp(){
   const handleSignup = () => {
     // For demonstration, simply display an alert with the input values.
     // In a real app, you would send these values to your backend server for signup.
-    console.log(`Name: ${name}\nEmail: ${email}\nPassword: ${password}\nImage: ${image}`);
+    console.log(`\nName: ${name}\nEmail: ${email}\nPassword: ${password}\nImage: ${image}`);
     };
-
-   
-    const navigation = useNavigation();
-
+    
     // Stores the selected image URI 
     const [file, setFile] = useState(null); 
-    
-  
     // Stores any error message 
+
     const [error, setError] = useState(null); 
-    
-  
     // Function to pick an image from  
     //the device's media library 
+
     const pickImage = async () => { 
         const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync(); 
   
