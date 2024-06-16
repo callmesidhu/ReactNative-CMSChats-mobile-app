@@ -4,7 +4,7 @@ import { StatusBar } from 'expo-status-bar';
 import Animated, { FadeInDown, FadeInUp } from 'react-native-reanimated';
 import { useNavigation } from '@react-navigation/native';
 import * as ImagePicker from 'expo-image-picker';
-import { auth, firestore, storage } from '../firebase/config'; // Adjust the path if necessary
+import { auth, getFirestore} from '../firebase/config'; // Adjust the path if necessary
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { collection, addDoc } from 'firebase/firestore';
@@ -60,7 +60,24 @@ function SignUp() {
            });
          }
        );
+
+
+          // Add user data to Firestore
+          const firestore = getFirestore();
+          const usersCollection = collection(firestore, 'users');
+          await addDoc(usersCollection, {
+            name,
+            email,
+            password,
+            userId: result.user.uid,
+            createdAt: new Date().toISOString(),
+          });
+
+          console.log('User data added to Firestore');
+
  
+
+
        navigation.navigate('LoginPage');
     } catch (error) {
       console.error('Error during registration:', error);
