@@ -53,35 +53,33 @@ function SignUp() {
            Alert.alert('Error uploading image', 'Failed to upload image. Please try again.');
          },
          () => {
-           // Upload completed successfully, get download URL
-           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-             console.log('File available at', downloadURL);
-             // Optionally, save the download URL to Firestore or use it as needed
-           });
-         }
-       );
+          // Upload completed successfully, get download URL
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            console.log('Profile URL', downloadURL);
 
-
-          // Add user data to Firestore
-          const firestore = getFirestore();
-          const usersCollection = collection(firestore, 'users');
-          await addDoc(usersCollection, {
-            name,
-            email,
-            password,
-            userId: result.user.uid,
-            createdAt: new Date().toISOString(),
+            // Add user data to Firestore
+            const firestore = getFirestore();
+            const usersCollection = collection(firestore, 'users');
+            addDoc(usersCollection, {
+              name,
+              email,
+              password,
+              imageUrl: downloadURL,
+              userId: result.user.uid,
+              createdAt: new Date().toDateString(), // Fixed date format method
+            })
+              .then(() => {
+                Alert.alert("User created successfully!");
+                navigation.navigate('LoginPage');
+              })
+              .catch((error) => {
+                console.error("Error adding user:", error);
+                Alert.alert("User creation failed!");
+              });
           });
+        }
+      );
 
-          console.log('User data added to Firestore');
-
- 
-
-
-       navigation.navigate('LoginPage');
-    } catch (error) {
-      console.error('Error during registration:', error);
-      Alert.alert('Registration failed', error.message);
     } finally {
       setLoading(false);
     }
