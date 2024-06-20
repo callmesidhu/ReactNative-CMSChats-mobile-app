@@ -20,7 +20,7 @@ function Login() {
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      navigation.navigate("HomePage");
+      navigation.navigate("Loader");
     } catch (error) {
       Alert.alert("Invalid email or password!");
     }
