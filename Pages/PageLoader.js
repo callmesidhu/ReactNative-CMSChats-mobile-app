@@ -1,22 +1,23 @@
 import { View, Text, ActivityIndicator } from 'react-native';
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { useNavigation } from '@react-navigation/native';
+import { AuthContext } from '../Context/authContext';
 
 
 export default function PageLoader() {
   const navigation = useNavigation();
+  const {isAuthenticated} = useContext(AuthContext); 
 
-  var isAuthenticated = true;
 
   useEffect(() => {
     setTimeout(() => {
-      if (!isAuthenticated) {
-        navigation.navigate("LoginPage");
-      } else {
+      if (isAuthenticated==true) {
         navigation.navigate("HomePage");
+      } else {
+        navigation.navigate("LoginPage");
       }
-    }, 2000);
-  }, []);
+    }, 3000);
+  }, [isAuthenticated]);
 
   return (
     <View className='flex-1 justify-center items-center'>
