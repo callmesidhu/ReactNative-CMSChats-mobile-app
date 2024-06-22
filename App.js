@@ -6,13 +6,14 @@ import Login from './Pages/Login';
 import SignUp from './Pages/Signup';
 import Home from './Pages/Home';
 import PageLoader from './Pages/PageLoader'
+import { MenuProvider } from 'react-native-popup-menu';
 
 
 const Stack = createStackNavigator();
 
 const App = () => {
   return (
-
+    <MenuProvider>
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Loader" screenOptions={{ headerShown: false }}>
        <Stack.Screen name="LoginPage" component={Login} />
@@ -21,6 +22,8 @@ const App = () => {
        <Stack.Screen name="Loader" component={PageLoader} />
        </Stack.Navigator>
     </NavigationContainer>
+    </MenuProvider>
+
   );
 };
 
