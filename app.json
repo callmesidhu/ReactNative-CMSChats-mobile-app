@@ -7,6 +7,9 @@
       "eas": {
         "projectId": "b92e130a-9c1c-4627-9d00-6f98223aa03e"
       }
-    }
+    },
+    "plugins": [
+      "expo-video"
+    ]
   }
 }
