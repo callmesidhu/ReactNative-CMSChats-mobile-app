@@ -1,5 +1,8 @@
 import { createContext, useState, useEffect, useContext } from 'react';
-import { auth } from '../firebase/config';
+import  { auth, getFirestore} from '../firebase/config';
+import { doc } from 'firebase/firestore';
+import { getDoc } from 'firebase/firestore';
+
 
 export const AuthContext = createContext();
 
@@ -8,7 +11,7 @@ export const AuthContextProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(undefined);
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((firebaseUser) => {
+    const unsubscribe = auth.onAuthStateChanged(async(firebaseUser) => {
       if (firebaseUser) {
         setIsAuthenticated(true);
         setUser(firebaseUser);
@@ -31,6 +34,10 @@ export const AuthContextProvider = ({ children }) => {
       throw error; 
     }
   };
+
+  
+
+
 
   return (
     <AuthContext.Provider value={{ user, isAuthenticated, logout }}>

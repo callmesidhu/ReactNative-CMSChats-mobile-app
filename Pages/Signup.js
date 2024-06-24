@@ -70,7 +70,7 @@ function SignUp() {
             })
               .then(() => {
                 Alert.alert("User created successfully!");
-                navigation.navigate('LoginPage');
+                navigation.navigate('Loader');
               })
               .catch((error) => {
                 console.error("Error adding user:", error);
