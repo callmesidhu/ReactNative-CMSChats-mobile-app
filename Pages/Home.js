@@ -27,14 +27,13 @@ export default function Home() {
   }
 
 
-  const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+  
   const [profile , setProfile] = useState(['']);
   const getUser = async () => {
     const q = query(usersRef, where('userId', '==', user?.uid));
     const querySnapshot = await getDocs(q);
     let data = [];
     querySnapshot.forEach(doc => {
-      sleep(1000); 
       data.push({ ...doc.data() });
     });
     setProfile(data[0]); 

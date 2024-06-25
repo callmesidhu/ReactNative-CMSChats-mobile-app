@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { View, Text, TouchableOpacity, TextInput } from 'react-native';
+import { View, Text, TouchableOpacity, TextInput, Alert} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
 import { heightPercentageToDP } from 'react-native-responsive-screen';
@@ -8,8 +8,8 @@ import { blurhash } from '../Context/assests';
 import MessageSection from '../Components/MessageSection';
 import { useAuth } from '../Context/authContext';
 import { getRoomId } from '../Context/getRoomId';
-import { doc, setDoc, Timestamp } from 'firebase/firestore';
-import { db } from '../firebase/config';
+import { addDoc, collection, doc, DocumentReference, getDocs, onSnapshot, orderBy, query, setDoc, Timestamp, where } from 'firebase/firestore';
+import { db, usersRef } from '../firebase/config';
 
 
 
@@ -19,11 +19,42 @@ export default function Chats({ route }) {
   const { user } = useAuth(); //login
   const navigation = useNavigation();
   const [messages, setMessages] = useState([]);
+  const [profile , setProfile] = useState(['']);
   const textRef = useRef('');
+  const inputRef = useRef(null);
+
+
+  const getUser = async () => {
+    const q = query(usersRef, where('userId', '==', user?.uid));
+    const querySnapshot = await getDocs(q);
+    let data = [];
+    querySnapshot.forEach(doc => {
+      data.push({ ...doc.data() });
+    });
+    setProfile(data[0]); 
+  };
+      useEffect(()=>{
+        if(user?.uid){
+          getUser();
+        }
+          
+      },[user?.uid]);
   
 
   useEffect(()=>{
       createRoomIfNotExists();
+      let roomId = getRoomId(user?.uid, item?.userId);
+      const docRef = doc(db, 'rooms',roomId);
+      const messageRef = collection(docRef,'messages');
+      const q = query(messageRef,orderBy('createdAt','asc'));
+      
+      let unsubscribe = onSnapshot(q, (snapshot)=>{
+            let allMessages = snapshot.docs.map(doc=>{
+                return doc.data();
+            });
+            setMessages([...allMessages]);
+      })
+      return unsubscribe;
   },[])
   const createRoomIfNotExists = async()=>{
       let roomId = getRoomId(item?.userId, user?.uid)
@@ -32,10 +63,31 @@ export default function Chats({ route }) {
         createdAt: Timestamp.fromDate(new Date())
       });
   }
+
   
-  const handleSendMessage = async ()=>{
-      let message = textRef.current.trim()
-  }
+  const handleSendMessage = async () => {
+    const message = textRef.current.trim();
+    if (!message) return;
+    try {
+      const roomId = getRoomId(item?.userId, user?.uid);
+      const docRef = doc(db, 'rooms', roomId);
+      const messageRef = collection(docRef, 'messages');
+      textRef.current = "";
+      if(inputRef){
+        inputRef?.current?.clear();
+      }
+      const newDoc = await addDoc(messageRef, {
+        userId: user?.uid,
+        text: message,
+        profileUrl: profile?.imageUrl,
+        senderName: profile?.name,
+        createdAt: Timestamp.fromDate(new Date()), // Corrected here
+      });
+    } catch (err) {
+      console.log('Message error:', err.message);
+    }
+  };
+  
 
   return (
     <View className='flex-1 bg-sky-600 '>
@@ -75,7 +127,8 @@ export default function Chats({ route }) {
                 <View className='flex-1 flex-row'>
                 <View className="flex-1 justify-between bg-white border p-2 rounded-full mx-2">
                     <TextInput 
-                        onChangeText={value=> textRef.current = value}
+                        ref={inputRef}
+                        onChangeText={(value) => (textRef.current = value)}
                         placeholder='Type a message...'
                         style={{fontSize: heightPercentageToDP(2)}}
                         className='flex-1 mx-2'
