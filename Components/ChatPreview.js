@@ -4,20 +4,28 @@ import { StatusBar } from 'expo-status-bar';
 import ChatList from './ChatList';
 import { heightPercentageToDP } from 'react-native-responsive-screen';
 import { useAuth } from '../Context/authContext';
+import { getDocs, query, where } from 'firebase/firestore';
+import {usersRef} from '../firebase/config'
 
 
 export default function ChatPreview() {
           const { user } = useAuth();
-          const [users, setUsers] = useState([1,2,3,4,5]);
+          const [users, setUsers] = useState([]);
           const getUsers = async()=>{
-
+            const q = query(usersRef, where('userId','!=',user?.uid));
+            const qureySnapshot = await getDocs(q);
+              let data = [];
+              qureySnapshot.forEach(doc=>{
+                data.push({...doc.data()});
+              });
+              setUsers(data);
           }
           useEffect(()=>{
             if(user?.uid){
               getUsers();
             }
               
-          },[])
+          },[user?.uid])
 
   return (
     <View className='flex-1 bg-white pl-3 '>
