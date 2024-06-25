@@ -7,10 +7,12 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { useAuth } from '../Context/authContext';
 import ChatPreview from '../Components/ChatPreview';
 import { blurhash } from '../Context/assests';
+import { getDocs, query, where } from 'firebase/firestore';
+import { usersRef } from '../firebase/config';
 
 
 export default function Home() {
-  const { logout } = useAuth();
+  const { user,logout } = useAuth();
  
   const handleLogout = async () => {
     try {
@@ -20,6 +22,25 @@ export default function Home() {
     }
   };
 
+
+  const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+  const [profile , setProfile] = useState(['']);
+  const getUser = async () => {
+    const q = query(usersRef, where('userId', '==', user?.uid));
+    const querySnapshot = await getDocs(q);
+    let data = [];
+    querySnapshot.forEach(doc => {
+      sleep(1000); 
+      data.push({ ...doc.data() });
+    });
+    setProfile(data[0]); 
+  };
+      useEffect(()=>{
+        if(user?.uid){
+          getUser();
+        }
+          
+      },[user?.uid]);
 
   return (
     <View className='flex-1'>
@@ -31,10 +52,10 @@ export default function Home() {
               <Image
                 className='float-left'
                 style={{ height: hp(4.3), aspectRatio: 1, borderRadius: 100 }}
-                source=''
+                source={{uri:profile?.imageUrl}}
                 placeholder={{ blurhash }}
                 contentFit="cover"
-                transition={500}
+                transition={1000}
               />
             </MenuTrigger>
             <MenuOptions>
