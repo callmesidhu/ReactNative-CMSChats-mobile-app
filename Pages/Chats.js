@@ -120,11 +120,11 @@ export default function Chats({ route }) {
       </View>
       <View className='flex-1 bg-white mt-3 rounded-t-3xl overflow-visible'>
              <View className='flex-1'>
-               <MessageSection messages={messages}/>
+               <MessageSection messages={messages} currentUser={user}/>
              </View>
-             <View style={{marginBottom: heightPercentageToDP(1.7)}}>
+             <View style={{marginBottom: heightPercentageToDP(1.0), marginTop: heightPercentageToDP(1.0)}}>
               <View className="flex-row items-center mx-3">
-                <View className='flex-1 flex-row'>
+                <View className='flex flex-row'>
                 <View className="flex-1 justify-between bg-white border p-2 rounded-full mx-2">
                     <TextInput 
                         ref={inputRef}
