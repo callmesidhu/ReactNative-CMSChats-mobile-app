@@ -17,6 +17,7 @@
     "expo-dev-client": "~4.0.14",
     "expo-image": "~1.12.12",
     "expo-image-picker": "^15.0.5",
+    "expo-router": "^3.5.16",
     "expo-status-bar": "~1.12.1",
     "expo-video": "^1.1.10",
     "firebase": "^10.12.2",

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Alert } from 'react-native';
 import { Image } from 'expo-image';
 import { Menu, MenuOptions, MenuOption, MenuTrigger } from 'react-native-popup-menu';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
@@ -21,6 +21,10 @@ export default function Home() {
       console.error('Logout error:', error);
     }
   };
+
+  const viewProfile = () =>{
+      Alert.alert("profile")
+  }
 
 
   const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
@@ -44,14 +48,14 @@ export default function Home() {
 
   return (
     <View className='flex-1'>
-      <View className='justify-between flex-row bg-sky-600 w-[100%] rounded-b-3xl h-24 pt-12 px-5'>
+      <View className='justify-between flex-row bg-sky-600 w-[100%] rounded-b-3xl h-24 px-5 items-center pt-6'>
         <Text className='text-2xl text-white font-medium'>Chats</Text>
         <View>
           <Menu>
             <MenuTrigger>
               <Image
                 className='float-left'
-                style={{ height: hp(4.3), aspectRatio: 1, borderRadius: 100 }}
+                style={{ height: hp(6), aspectRatio: 1, borderRadius: 100 }}
                 source={{uri:profile?.imageUrl}}
                 placeholder={{ blurhash }}
                 contentFit="cover"
@@ -59,7 +63,7 @@ export default function Home() {
               />
             </MenuTrigger>
             <MenuOptions>
-              <MenuOption onSelect={() => alert('Profile')}>
+              <MenuOption onSelect={viewProfile}>
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                   <Icon name="user" size={20} color="black" />
                   <Text style={{ marginLeft: 10 }}>Profile</Text>

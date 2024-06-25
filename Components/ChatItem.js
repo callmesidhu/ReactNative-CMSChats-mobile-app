@@ -6,7 +6,7 @@ import { Image } from 'expo-image';
     
  export default function ChatItem({ item, navigation }) { 
       const openChatRoom = () =>{
-          navigation.navigate('ChatPage');
+          navigation.navigate('ChatPage',{item});
       }
 
         return ( 
