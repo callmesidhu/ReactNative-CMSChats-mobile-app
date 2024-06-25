@@ -125,7 +125,7 @@ export default function Chats({ route }) {
              <View style={{marginBottom: heightPercentageToDP(1.0), marginTop: heightPercentageToDP(1.0)}}>
               <View className="flex-row items-center mx-3">
                 <View className='flex flex-row'>
-                <View className="flex-1 justify-between bg-white border p-2 rounded-full mx-2">
+                <View className="flex-1 justify-between bg-neutral-100 border border-indigo-900 p-2 rounded-full mx-2">
                     <TextInput 
                         ref={inputRef}
                         onChangeText={(value) => (textRef.current = value)}
