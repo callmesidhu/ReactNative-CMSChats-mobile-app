@@ -8,6 +8,7 @@ import { auth, getFirestore} from '../firebase/config'; // Adjust the path if ne
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { collection, addDoc } from 'firebase/firestore';
+import ResponsiveKeyboard from '../Components/ResponsiveKeyboard';
 
 function SignUp() {
   const navigation = useNavigation();
@@ -110,6 +111,7 @@ function SignUp() {
   };
 
   return (
+  
     <View className='flex-1'>
       <StatusBar style='light' />
       <Animated.Image
@@ -176,6 +178,7 @@ function SignUp() {
         </View>
       </View>
     </View>
+  
   );
 }
 

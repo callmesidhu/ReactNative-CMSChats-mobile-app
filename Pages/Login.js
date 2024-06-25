@@ -3,7 +3,7 @@ import { View, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import Animated, { FadeInDown, FadeInUp } from 'react-native-reanimated';
 import { useNavigation } from '@react-navigation/native';
-import { auth } from '../firebase/config'; // Ensure this path is correct
+import { auth } from '../firebase/config'; 
 import { signInWithEmailAndPassword } from 'firebase/auth';
 
 function Login() {
