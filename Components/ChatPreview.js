@@ -8,7 +8,7 @@ import { getDocs, query, where } from 'firebase/firestore';
 import {usersRef} from '../firebase/config'
 
 
-export default function ChatPreview() {
+export default function ChatPreview({profile}) {
           const { user } = useAuth();
           const [users, setUsers] = useState([]);
           const getUsers = async()=>{
@@ -32,7 +32,7 @@ export default function ChatPreview() {
       <StatusBar style='light'/>
         {
           users.length>0? (
-            <ChatList users={users}/>
+            <ChatList users={users} profile={profile}/>
           ):(
             <View className='flex items-center' style={{top: heightPercentageToDP(30)}}>
               <ActivityIndicator size='large'/>

@@ -9,10 +9,12 @@ import ChatPreview from '../Components/ChatPreview';
 import { blurhash } from '../Context/assests';
 import { getDocs, query, where } from 'firebase/firestore';
 import { usersRef } from '../firebase/config';
+import { useNavigation } from '@react-navigation/native';
 
 
 export default function Home() {
   const { user,logout } = useAuth();
+  const navigation = useNavigation();
  
   const handleLogout = async () => {
     try {
@@ -23,11 +25,9 @@ export default function Home() {
   };
 
   const viewProfile = () =>{
-      Alert.alert("profile")
+    navigation.navigate('ProfilePage');
   }
 
-
-  
   const [profile , setProfile] = useState(['']);
   const getUser = async () => {
     const q = query(usersRef, where('userId', '==', user?.uid));
@@ -44,6 +44,8 @@ export default function Home() {
         }
           
       },[user?.uid]);
+
+    
 
   return (
     <View className='flex-1'>
@@ -79,7 +81,7 @@ export default function Home() {
         </View>
       </View>
 
-    <ChatPreview/>
+    <ChatPreview profile={profile}/>
     </View>
   );
 }

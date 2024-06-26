@@ -3,7 +3,7 @@ import React from 'react'
 import ChatItem from './ChatItem'
 import { useNavigation } from '@react-navigation/native';
 
-export default function ChatList({users}) {
+export default function ChatList({ users, profile }) {
    const navigation = useNavigation();
   return (
           <View className='flex-1 pt-3'> 
@@ -15,6 +15,7 @@ export default function ChatList({users}) {
                   item={item}
                   navigation={navigation}
                   index={index}
+                  profile={profile}
                   
                   />} 
             /> 

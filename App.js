@@ -9,6 +9,7 @@ import PageLoader from './Pages/PageLoader'
 import { MenuProvider } from 'react-native-popup-menu';
 import { AuthContextProvider } from './Context/authContext';
 import Chats from './Pages/Chats';
+import Profile from './Pages/Profile'
 
 
 const Stack = createStackNavigator();
@@ -24,6 +25,7 @@ const App = () => {
             <Stack.Screen name="HomePage" component={Home} />
             <Stack.Screen name="Loader" component={PageLoader} />
             <Stack.Screen name="ChatPage" component={Chats} />
+            <Stack.Screen name="ProfilePage" component={Profile} />
           </Stack.Navigator>
         </NavigationContainer>
       </MenuProvider>

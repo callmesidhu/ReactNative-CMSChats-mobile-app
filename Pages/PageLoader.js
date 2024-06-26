@@ -16,7 +16,7 @@ export default function PageLoader() {
       } else {
         navigation.navigate("LoginPage");
       }
-    }, 3000);
+    }, 1000);
   }, [isAuthenticated]);
 
   return (

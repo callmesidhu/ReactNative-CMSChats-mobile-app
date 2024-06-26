@@ -5,8 +5,6 @@ import { blurhash } from '../Context/assests'
 import { Image } from 'expo-image'
 
 export default function MessageItem({message, currentUser}) {
-
-
           if(currentUser?.uid==message?.userId){
                     return (
                     <View className='flex-row flex-1 justify-end mb-3 mr-3'>

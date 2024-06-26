@@ -22,6 +22,7 @@ export default function Chats({ route }) {
   const [profile , setProfile] = useState(['']);
   const textRef = useRef('');
   const inputRef = useRef(null);
+  const scrollViewRef = useRef(null)
 
 
   const getUser = async () => {
@@ -56,6 +57,7 @@ export default function Chats({ route }) {
       })
       return unsubscribe;
   },[])
+
   const createRoomIfNotExists = async()=>{
       let roomId = getRoomId(item?.userId, user?.uid)
       await setDoc(doc(db, 'rooms' , roomId),{
@@ -87,6 +89,15 @@ export default function Chats({ route }) {
       console.log('Message error:', err.message);
     }
   };
+
+  useEffect(()=>{
+    updateScrollView();
+  },[messages])
+  const updateScrollView=()=>{
+    setTimeout(()=>{
+      scrollViewRef?.current?.scrollToEnd({animated:True})
+    })
+  }
   
 
   return (
@@ -120,7 +131,7 @@ export default function Chats({ route }) {
       </View>
       <View className='flex-1 bg-white mt-3 rounded-t-3xl overflow-visible'>
              <View className='flex-1'>
-               <MessageSection messages={messages} currentUser={user}/>
+               <MessageSection scrollViewRef={scrollViewRef} messages={messages} currentUser={user}/>
              </View>
              <View style={{marginBottom: heightPercentageToDP(1.0), marginTop: heightPercentageToDP(1.0)}}>
               <View className="flex-row items-center mx-3">

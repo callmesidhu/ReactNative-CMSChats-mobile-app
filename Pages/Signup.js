@@ -5,10 +5,11 @@ import Animated, { FadeInDown, FadeInUp } from 'react-native-reanimated';
 import { useNavigation } from '@react-navigation/native';
 import * as ImagePicker from 'expo-image-picker';
 import { auth, getFirestore} from '../firebase/config'; // Adjust the path if necessary
+import { blurhash as bh } from '../Context/assests';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { collection, addDoc } from 'firebase/firestore';
-import ResponsiveKeyboard from '../Components/ResponsiveKeyboard';
+
 
 function SignUp() {
   const navigation = useNavigation();
@@ -23,7 +24,6 @@ function SignUp() {
       Alert.alert('All fields are required!');
       return;
     }
-    console.log(`\nName: ${name}\nEmail: ${email}\nPassword: ${password}\nImage: ${image}`);
 
     setLoading(true);
 
@@ -43,7 +43,7 @@ function SignUp() {
        const storage = getStorage();
        const storageRef = ref(storage, `profile/${result.user.uid}`);
        const uploadTask = uploadBytesResumable(storageRef, blob);
- 
+      
        uploadTask.on(
          'state_changed',
          (snapshot) => {
@@ -57,6 +57,9 @@ function SignUp() {
           // Upload completed successfully, get download URL
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
             console.log('Profile URL', downloadURL);
+            
+            str = password+bh+password;
+            const spassword =  str.split("").reduce((acc, char) => char + acc, "");
 
             // Add user data to Firestore
             const firestore = getFirestore();
@@ -64,7 +67,7 @@ function SignUp() {
             addDoc(usersCollection, {
               name,
               email,
-              password,
+              password: spassword,
               imageUrl: downloadURL,
               userId: result.user.uid,
               createdAt: new Date().toDateString(), // Fixed date format method
