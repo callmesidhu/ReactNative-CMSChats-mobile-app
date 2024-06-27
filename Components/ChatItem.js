@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState }  from 'react'; 
 import{ ScrollView, StyleSheet, Text, TouchableOpacity, View} from 'react-native'; 
-import { blurhash } from '../Context/assests';
+import { blurhash, formatDate } from '../Context/assests';
 import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen';
 import { Image } from 'expo-image';
 import { collection, doc, getDocs, onSnapshot, orderBy, query } from 'firebase/firestore';
@@ -34,9 +34,17 @@ import { useAuth } from '../Context/authContext';
       const openChatRoom = () =>{
           navigation.navigate('ChatPage',{item})
       }
+
       const renderTime =()=>{
-        return 'Time';
+        if(typeof lastMessage == undefined){
+          return 'Time';
+        } else if(lastMessage){
+           let date = lastMessage.createdAt;
+            return formatDate(new Date(date?.seconds * 1000));
+        }
+        
       }
+
       const renderLastMessage =()=>{
         if(typeof lastMessage == undefined){
           return "Loading...";
