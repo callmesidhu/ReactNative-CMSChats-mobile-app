@@ -7,6 +7,7 @@ import { useAuth } from '../Context/authContext';
 import { getDocs, query, where } from 'firebase/firestore';
 import {usersRef} from '../firebase/config'
 import Animated, { FadeInDown, SlideInDown } from 'react-native-reanimated';
+import LottieView from 'lottie-react-native';
 
 
 export default function ChatPreview({profile}) {
@@ -36,7 +37,7 @@ export default function ChatPreview({profile}) {
             <ChatList users={users} profile={profile}/>
           ):(
             <View className='flex items-center' style={{top: heightPercentageToDP(30)}}>
-              <ActivityIndicator size='large'/>
+               <LottieView className='w-24 aspect-square'  source={require('../Resources/loaderAnimation.json')} autoPlay loop ></LottieView>
             </View>
           )
         }

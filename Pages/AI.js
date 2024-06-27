@@ -24,7 +24,7 @@ const navigation = useNavigation()
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Icon name="arrow-left" size={20} color="white" />
         </TouchableOpacity>
-        <Animated.View entering={SlideInRight.delay(100).duration(1000)} className='px-5 flex-row flex-1 justify-around p-3g mx-6 rounded-3xl pt-4 shadow items-center' style={{backgroundColor:'#027ab8'}}>
+        <Animated.View entering={SlideInRight.delay(100).duration(1000)} className='px-5 flex-row flex-1 justify-around p-3 mx-6 rounded-3xl pt-4 shadow items-center' style={{backgroundColor:'#027ab8'}}>
         <View className='flex-1 flex-row items-center'>
              <Image
                 className='float-left'
