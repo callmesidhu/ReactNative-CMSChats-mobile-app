@@ -10,6 +10,7 @@ import { blurhash } from '../Context/assests';
 import { getDocs, query, where } from 'firebase/firestore';
 import { usersRef } from '../firebase/config';
 import { useNavigation } from '@react-navigation/native';
+import Animated, { BounceIn, FadeInDown, FadeInRight, FadeInUp, LightSpeedInRight, SlideInUp } from 'react-native-reanimated';
 
 
 export default function Home() {
@@ -48,19 +49,19 @@ export default function Home() {
     
 
   return (
-    <View className='flex-1'>
-      <View className='justify-between flex-row bg-sky-600 w-[100%] rounded-b-3xl h-24 px-5 items-center pt-6'>
+    <View className='flex-1 bg-white'>
+      <Animated.View entering={SlideInUp.delay(500).duration(2000)} className='justify-between flex-row bg-sky-600 w-[100%] rounded-b-3xl h-24 px-5 items-center pt-6'>
         <Text className='text-2xl text-white font-medium'>Chats</Text>
         <View>
           <Menu>
             <MenuTrigger>
-              <Image
+              <Animated.Image entering={FadeInRight.delay(2000).duration(1000).springify()}
                 className='float-left'
                 style={{ height: hp(6), aspectRatio: 1, borderRadius: 100 }}
                 source={{uri:profile?.imageUrl}}
                 placeholder={{ blurhash }}
                 contentFit="cover"
-                transition={500}
+                transition={700}
               />
             </MenuTrigger>
             <MenuOptions>
@@ -79,7 +80,7 @@ export default function Home() {
             </MenuOptions>
           </Menu>
         </View>
-      </View>
+      </Animated.View>
 
     <ChatPreview profile={profile}/>
     </View>

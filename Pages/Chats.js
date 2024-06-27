@@ -10,6 +10,7 @@ import { useAuth } from '../Context/authContext';
 import { getRoomId } from '../Context/getRoomId';
 import { addDoc, collection, doc, getDocs, onSnapshot, orderBy, query, setDoc, Timestamp, where } from 'firebase/firestore';
 import { db, usersRef } from '../firebase/config';
+import Animated, { SlideInDown, SlideInRight } from 'react-native-reanimated';
 
 
 
@@ -106,23 +107,23 @@ export default function Chats({ route }) {
                 source={{uri:item.imageUrl}}
                 placeholder={{ blurhash }}
                 contentFit="cover"
-                transition={500}
+                transition={2000}
               />
             <Text className='mx-4 text-2xl text-white font-medium'>{item.name}</Text>
         </View>
         <View className='flex-1'>
-        <View className='flex-row flex-1 justify-around p-3 mx-6 rounded-3xl pt-4 shadow items-center' style={{backgroundColor:'#027ab8'}}>
+        <Animated.View entering={SlideInRight.delay(100).duration(1000)} className='flex-row flex-1 justify-around p-3 mx-6 rounded-3xl pt-4 shadow items-center' style={{backgroundColor:'#027ab8'}}>
         <TouchableOpacity className='' onPress={() => alert('Available in next update..!')}>
             <Icon name="phone" size={26} color="white" />
           </TouchableOpacity>
           <TouchableOpacity className='' onPress={() => alert('Available in next update..!')}>
             <Icon name="video-camera" size={25} color="white" />
           </TouchableOpacity>
-        </View>
+        </Animated.View>
         </View>
         
       </View>
-      <View className='flex-1 bg-white mt-3 rounded-t-3xl overflow-visible'>
+      <Animated.View entering={SlideInDown.delay(0).duration(1200)} style={{backgroundColor: '#FEFFE9'}} className=' flex-1 mt-3 rounded-t-3xl overflow-visible'>
              <View className='flex-1'>
                <MessageSection messages={messages} currentUser={user}/>
              </View>
@@ -144,7 +145,7 @@ export default function Chats({ route }) {
                 </View>
               </View>
              </View>
-          </View>
+          </Animated.View>
     </View>
   );
 }

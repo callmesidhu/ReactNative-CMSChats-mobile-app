@@ -6,6 +6,7 @@ import { heightPercentageToDP } from 'react-native-responsive-screen';
 import { useAuth } from '../Context/authContext';
 import { getDocs, query, where } from 'firebase/firestore';
 import {usersRef} from '../firebase/config'
+import Animated, { FadeInDown, SlideInDown } from 'react-native-reanimated';
 
 
 export default function ChatPreview({profile}) {
@@ -28,7 +29,7 @@ export default function ChatPreview({profile}) {
           },[user?.uid])
 
   return (
-    <View className='flex-1 bg-white pl-3 pt-3'>
+    <Animated.View entering={SlideInDown.delay(2000).duration(1000)} className='flex-1 bg-white pl-3 pt-3'>
       <StatusBar style='light'/>
         {
           users.length>0? (
@@ -39,6 +40,6 @@ export default function ChatPreview({profile}) {
             </View>
           )
         }
-    </View>
+    </Animated.View>
   )
 }

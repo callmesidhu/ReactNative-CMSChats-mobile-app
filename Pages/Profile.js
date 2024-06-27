@@ -8,6 +8,7 @@ import { Image } from 'expo-image';
 import { getDocs, query, where } from 'firebase/firestore';
 import { usersRef } from '../firebase/config';
 import { useAuth } from '../Context/authContext';
+import Animated, { FlipInEasyX } from 'react-native-reanimated';
 
 
 export default function Profile() {
@@ -38,16 +39,16 @@ export default function Profile() {
             </TouchableOpacity>
            <Text className='mx-4 text-2xl text-white font-medium'>Profile</Text>
           </View>
-          <View className=' bg-slate-100 m-3 rounded-[30px] justify-center items-center'>
+          <Animated.View  entering={FlipInEasyX.delay(200).duration(1000).springify()} className=' bg-slate-100 m-3 rounded-[30px] justify-center items-center'>
           <Image
                     className='my-10'
                     style={{ height: heightPercentageToDP(16), aspectRatio: 1, borderRadius: 100 }}
                     source={{uri:profile?.imageUrl}}
                     placeholder={{ blurhash }}
                     contentFit="cover"
-                    transition={500}
+                    transition={5}
                   />
-          <View className='mb-6 w-[85%] '>
+          <View className='mb-6 w-[85%]'>
                     <View className='flex-row mb-2 items-end'> 
                     <Text className='text-xl font-normal'>Name: </Text>
                     <Text className='text-3xl font-semibold'>{profile?.name}</Text>
@@ -56,7 +57,7 @@ export default function Profile() {
                     <Text className='text-xl font-medium'>Email: {profile?.email}</Text>
                     </View> 
           </View>
-          </View>
+          </Animated.View>
         </View>
   )
 }
