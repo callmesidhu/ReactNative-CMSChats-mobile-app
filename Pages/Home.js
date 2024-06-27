@@ -11,6 +11,7 @@ import { getDocs, query, where } from 'firebase/firestore';
 import { usersRef } from '../firebase/config';
 import { useNavigation } from '@react-navigation/native';
 import Animated, { BounceIn, FadeInDown, FadeInRight, FadeInUp, LightSpeedInRight, SlideInUp } from 'react-native-reanimated';
+import AIChatItem from '../Components/AIChatItem';
 
 
 export default function Home() {
@@ -81,7 +82,7 @@ export default function Home() {
           </Menu>
         </View>
       </Animated.View>
-
+    <AIChatItem/>
     <ChatPreview profile={profile}/>
     </View>
   );

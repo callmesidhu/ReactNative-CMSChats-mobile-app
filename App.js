@@ -10,6 +10,7 @@ import { MenuProvider } from 'react-native-popup-menu';
 import { AuthContextProvider } from './Context/authContext';
 import Chats from './Pages/Chats';
 import Profile from './Pages/Profile'
+import AI from './Pages/AI';
 
 
 const Stack = createStackNavigator();
@@ -26,6 +27,7 @@ const App = () => {
             <Stack.Screen name="Loader" component={PageLoader} />
             <Stack.Screen name="ChatPage" component={Chats} />
             <Stack.Screen name="ProfilePage" component={Profile} />
+            <Stack.Screen name="AIPage" component={AI} />
           </Stack.Navigator>
         </NavigationContainer>
       </MenuProvider>

@@ -64,7 +64,7 @@ import { useAuth } from '../Context/authContext';
   
   
         return ( 
-          <TouchableOpacity onPress={openChatRoom} className='justify-between flex-1 flex-row mx-6 items-center gap-3 mb-4 pb-2 border-b border-b-neutral-200'>
+            <TouchableOpacity onPress={openChatRoom} className='justify-between flex-1 flex-row mx-6 items-center gap-3 mb-4 pb-2 border-b border-b-neutral-200'>
             <Image 
                 className='rounded-full'
                 style={{ height: heightPercentageToDP(6),aspectRatio:1}}
@@ -83,5 +83,6 @@ import { useAuth } from '../Context/authContext';
                 </Text>
               </View>
           </TouchableOpacity>
+
           ); 
         } 

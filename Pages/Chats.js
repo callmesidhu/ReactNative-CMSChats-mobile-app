@@ -107,7 +107,7 @@ export default function Chats({ route }) {
                 source={{uri:item.imageUrl}}
                 placeholder={{ blurhash }}
                 contentFit="cover"
-                transition={2000}
+                transition={1000}
               />
             <Text className='mx-4 text-2xl text-white font-medium'>{item.name}</Text>
         </View>

@@ -25,7 +25,7 @@ export default function PageLoader() {
   return (
     <View className='flex-1 justify-center items-center'>
       <LottieView className='w-64 aspect-square' ref={animation} source={require('../Resources/loaderAnimation.json')} autoPlay loop ></LottieView>
-      <Text className='text-xl text-cyan-800 font-semibold text-center'>Please wait..!</Text>
+      <Text className='text-xl text-cyan-800 font-semibold text-center'>Please wait 3s... or Retry</Text>
     </View>
   );
 };
