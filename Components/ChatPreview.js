@@ -28,7 +28,7 @@ export default function ChatPreview({profile}) {
           },[user?.uid])
 
   return (
-    <View className='flex-1 bg-white pl-3 '>
+    <View className='flex-1 bg-white pl-3 pt-3'>
       <StatusBar style='light'/>
         {
           users.length>0? (

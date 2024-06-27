@@ -9,6 +9,7 @@ import { getDocs, query, where } from 'firebase/firestore';
 import { usersRef } from '../firebase/config';
 import { useAuth } from '../Context/authContext';
 
+
 export default function Profile() {
           const navigation = useNavigation();
           const { user } = useAuth();
@@ -46,13 +47,13 @@ export default function Profile() {
                     contentFit="cover"
                     transition={500}
                   />
-          <View className='mb-6 w-[75%] '>
-                    <View className='flex-row'> 
-                    <Text className='text-2xl font-normal'>Name: </Text>
+          <View className='mb-6 w-[85%] '>
+                    <View className='flex-row mb-2 items-end'> 
+                    <Text className='text-xl font-normal'>Name: </Text>
                     <Text className='text-3xl font-semibold'>{profile?.name}</Text>
                     </View>
-                    <View className=''>
-                    <Text className='text-2xl font-medium'>Email: {profile?.email}</Text>
+                    <View className='mb-6'>
+                    <Text className='text-xl font-medium'>Email: {profile?.email}</Text>
                     </View> 
           </View>
           </View>

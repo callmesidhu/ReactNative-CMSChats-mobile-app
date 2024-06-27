@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { View, Text, TouchableOpacity, TextInput, Alert} from 'react-native';
+import { View, Text, TouchableOpacity, TextInput} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
 import { heightPercentageToDP } from 'react-native-responsive-screen';
@@ -8,7 +8,7 @@ import { blurhash } from '../Context/assests';
 import MessageSection from '../Components/MessageSection';
 import { useAuth } from '../Context/authContext';
 import { getRoomId } from '../Context/getRoomId';
-import { addDoc, collection, doc, DocumentReference, getDocs, onSnapshot, orderBy, query, setDoc, Timestamp, where } from 'firebase/firestore';
+import { addDoc, collection, doc, getDocs, onSnapshot, orderBy, query, setDoc, Timestamp, where } from 'firebase/firestore';
 import { db, usersRef } from '../firebase/config';
 
 
@@ -22,7 +22,7 @@ export default function Chats({ route }) {
   const [profile , setProfile] = useState(['']);
   const textRef = useRef('');
   const inputRef = useRef(null);
-  const scrollViewRef = useRef(null)
+  
 
 
   const getUser = async () => {
@@ -83,21 +83,14 @@ export default function Chats({ route }) {
         text: message,
         profileUrl: profile?.imageUrl,
         senderName: profile?.name,
-        createdAt: Timestamp.fromDate(new Date()), // Corrected here
+        createdAt: Timestamp.fromDate(new Date()),
       });
     } catch (err) {
       console.log('Message error:', err.message);
     }
   };
 
-  useEffect(()=>{
-    updateScrollView();
-  },[messages])
-  const updateScrollView=()=>{
-    setTimeout(()=>{
-      scrollViewRef?.current?.scrollToEnd({animated:True})
-    })
-  }
+
   
 
   return (
@@ -119,10 +112,10 @@ export default function Chats({ route }) {
         </View>
         <View className='flex-1'>
         <View className='flex-row flex-1 justify-around p-3 mx-6 rounded-3xl pt-4 shadow items-center' style={{backgroundColor:'#027ab8'}}>
-        <TouchableOpacity className='' onPress={() => alert('available in next update')}>
+        <TouchableOpacity className='' onPress={() => alert('Available in next update..!')}>
             <Icon name="phone" size={26} color="white" />
           </TouchableOpacity>
-          <TouchableOpacity className='' onPress={() => alert('available in next update')}>
+          <TouchableOpacity className='' onPress={() => alert('Available in next update..!')}>
             <Icon name="video-camera" size={25} color="white" />
           </TouchableOpacity>
         </View>
@@ -131,7 +124,7 @@ export default function Chats({ route }) {
       </View>
       <View className='flex-1 bg-white mt-3 rounded-t-3xl overflow-visible'>
              <View className='flex-1'>
-               <MessageSection scrollViewRef={scrollViewRef} messages={messages} currentUser={user}/>
+               <MessageSection messages={messages} currentUser={user}/>
              </View>
              <View style={{marginBottom: heightPercentageToDP(1.0), marginTop: heightPercentageToDP(1.0)}}>
               <View className="flex-row items-center mx-3">
