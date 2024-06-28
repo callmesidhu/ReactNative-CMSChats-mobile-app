@@ -34,13 +34,13 @@ function SignUp() {
     setLoading(true);
 
     try {
-      console.log('Creating user with email and password...');
+   //   console.log('Creating user with email and password...');
       const result = await createUserWithEmailAndPassword(auth, email, password);
-      console.log('User created:', result.user.uid);
+    //  console.log('User created:', result.user.uid);
 
-      console.log('Updating user profile...');
+   //   console.log('Updating user profile...');
       await updateProfile(result.user, { displayName: name });
-      console.log('User profile updated');
+ //     console.log('User profile updated');
 
 
        // Upload image to Firebase Storage

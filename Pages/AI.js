@@ -45,7 +45,7 @@ const navigation = useNavigation()
       </View>
       <Animated.View entering={SlideInDown.delay(0).duration(1200)} style={{backgroundColor: '#FEFFE9'}} className=' flex-1 m-4 rounded-3xl overflow-visible'>
              <View className='flex-1 items-center justify-center'>
-               <Text>Available in next update!</Text>
+               <Text>Available in V2.0!</Text>
              </View>
           </Animated.View>
           <Animated.View entering={SlideInDown.delay(600).duration(700)} style={{marginBottom: heightPercentageToDP(1.0), marginTop: heightPercentageToDP(1.0)}}>
@@ -53,7 +53,7 @@ const navigation = useNavigation()
                 <View className='flex flex-row'>
                 <View className="flex-1 justify-between bg-neutral-100 border border-indigo-900 p-2 rounded-full mx-2">
                     <TextInput 
-                        onChangeText={(value) => (textRef.current = value)}
+               //         onChangeText={(value) => (textRef.current = value)}
                         placeholder='Type a message...'
                         style={{fontSize: heightPercentageToDP(2)}}
                         className='flex-1 mx-2'

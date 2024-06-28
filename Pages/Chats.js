@@ -8,7 +8,7 @@ import { blurhash } from '../Context/assests';
 import MessageSection from '../Components/MessageSection';
 import { useAuth } from '../Context/authContext';
 import { getRoomId } from '../Context/getRoomId';
-import { addDoc, collection, doc, getDocs, onSnapshot, orderBy, query, setDoc, Timestamp, where } from 'firebase/firestore';
+import { addDoc, collection, doc, FieldValue, getDocs, onSnapshot, orderBy, query, serverTimestamp, setDoc, Timestamp, where } from 'firebase/firestore';
 import { db, usersRef } from '../firebase/config';
 import Animated, { SlideInDown, SlideInRight } from 'react-native-reanimated';
 
@@ -84,7 +84,7 @@ export default function Chats({ route }) {
         text: message,
         profileUrl: profile?.imageUrl,
         senderName: profile?.name,
-        createdAt: Timestamp.fromDate(new Date()),
+        createdAt: serverTimestamp(), 
       });
     } catch (err) {
       console.log('Message error:', err.message);
@@ -113,10 +113,10 @@ export default function Chats({ route }) {
         </View>
         <View className='flex-1'>
         <Animated.View entering={SlideInRight.delay(100).duration(1000)} className='flex-row flex-1 justify-around p-3 mx-6 rounded-3xl pt-4 shadow items-center' style={{backgroundColor:'#027ab8'}}>
-        <TouchableOpacity className='' onPress={() => alert('Available in next update..!')}>
+        <TouchableOpacity className='' onPress={() => alert('Comming soon!')}>
             <Icon name="phone" size={26} color="white" />
           </TouchableOpacity>
-          <TouchableOpacity className='' onPress={() => alert('Available in next update..!')}>
+          <TouchableOpacity className='' onPress={() => alert('Comming soon!')}>
             <Icon name="video-camera" size={25} color="white" />
           </TouchableOpacity>
         </Animated.View>
