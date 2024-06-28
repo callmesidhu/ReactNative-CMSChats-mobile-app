@@ -21,6 +21,7 @@ export default function Home() {
   const handleLogout = async () => {
     try {
       await logout();
+      navigation.navigate('Loader');
     } catch (error) {
       console.error('Logout error:', error);
     }
