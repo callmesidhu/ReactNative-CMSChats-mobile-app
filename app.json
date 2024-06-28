@@ -7,7 +7,11 @@
       "eas": {
         "projectId": "b92e130a-9c1c-4627-9d00-6f98223aa03e"
       }
-    },
+    },"splash": {
+    "image": "./assets/splash.png",
+    "backgroundColor": "#111111"
+  },
+  "icon": "./assets/AppIcon.png",
     "plugins": [
       "expo-video",
       "expo-font"
