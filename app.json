@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "MobileChatApp",
-    "slug": "MobileChatApp",
+    "name": "CMS Chats",
+    "slug": "AndroidChatApp",
     "version": "1.0.0",
     "extra": {
       "eas": {
