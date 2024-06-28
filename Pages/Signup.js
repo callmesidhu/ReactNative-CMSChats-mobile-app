@@ -25,6 +25,12 @@ function SignUp() {
       return;
     }
 
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      Alert.alert('Invalid Email', 'Please enter a valid email address.');
+      return;
+    }
+
     setLoading(true);
 
     try {
@@ -174,7 +180,7 @@ function SignUp() {
           </Animated.View>
           <View className='justify-center flex-row'>
             <Text>I already have an account,</Text>
-            <TouchableOpacity onPress={() => navigation.navigate('LoginPage')}>
+            <TouchableOpacity onPress={() => navigation.navigate('Loader')}>
               <Text className='text-sky-600'> Login </Text>
             </TouchableOpacity>
           </View>

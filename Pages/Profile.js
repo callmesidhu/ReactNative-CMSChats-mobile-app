@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity } from 'react-native'
+import { View, Text, TouchableOpacity, Linking } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -15,6 +15,9 @@ export default function Profile() {
           const navigation = useNavigation();
           const { user } = useAuth();
           const [profile , setProfile] = useState(['']);
+          const openURL = (url) => {
+            Linking.openURL(url).catch((err) => console.error('An error occurred', err));
+          };
           const getUser = async () => {
             const q = query(usersRef, where('userId', '==', user?.uid));
             const querySnapshot = await getDocs(q);
@@ -32,8 +35,9 @@ export default function Profile() {
               },[user?.uid]);
   return (
 
-          <View className='flex-1 bg-sky-600'>
-          <View className='mb-5 justify-between flex-row w-[100%] h-24 px-5 items-center pt-10'>
+          <View className='flex-1 bg-sky-600 justify-between'>
+         <View>
+         <View className='mb-5 justify-between flex-row w-[100%] h-24 px-5 items-center pt-10'>
             <TouchableOpacity onPress={() => navigation.goBack()}>
               <Icon name="arrow-left" size={25} color="white" />
             </TouchableOpacity>
@@ -58,6 +62,8 @@ export default function Profile() {
                     </View> 
           </View>
           </Animated.View>
+         </View>
+         <Text onPress={() => openURL('https://www.instagram.com/callmesidhu__/')} className='text-center font-semibold text-white mb-4'>&copy; Developer : callmesidhu(2024)</Text>
         </View>
   )
 }

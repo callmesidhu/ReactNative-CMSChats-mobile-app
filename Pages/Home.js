@@ -51,7 +51,7 @@ export default function Home() {
 
   return (
     <View className='flex-1 bg-white'>
-      <Animated.View entering={SlideInUp.delay(500).duration(2000)} className='justify-between flex-row bg-sky-600 w-[100%] rounded-b-3xl h-24 px-5 items-center pt-6'>
+      <Animated.View entering={SlideInUp.delay(200).duration(2000)} className='justify-between flex-row bg-sky-600 w-[100%] rounded-b-3xl h-24 px-5 items-center pt-6'>
         <Text className='text-2xl text-white font-medium'>Chats</Text>
         <View>
           <Menu>
