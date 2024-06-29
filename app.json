@@ -1,20 +1,13 @@
 {
   "expo": {
     "name": "CMS Chats",
-    "slug": "cms-chats",
-     "android": {
-      "package": "com.cmschats"
-     },
+    "slug": "CMS-Chats",
     "version": "1.0.0",
-    "extra": {
-      "eas": {
-        "projectId": "610eeb42-0dd4-4f25-a29c-6449a08c01f8"
-      }
-    },"splash": {
+    "splash": {
     "image": "./assets/splash.png",
     "backgroundColor": "#111111"
-  },
-  "icon": "./assets/AppIcon.png",
+     },
+    "icon": "./assets/AppIcon.png",
     "plugins": [
       "expo-video",
       "expo-font"

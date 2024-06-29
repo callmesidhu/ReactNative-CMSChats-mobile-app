@@ -83,9 +83,9 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace "com.androidchatapp"
+    namespace "com.cmschats"
     defaultConfig {
-        applicationId "com.androidchatapp"
+        applicationId "com.cmschats"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

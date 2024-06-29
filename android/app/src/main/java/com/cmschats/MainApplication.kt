@@ -1,4 +1,4 @@
-package com.androidchatapp
+package com.cmschats
 
 import android.app.Application
 import android.content.res.Configuration

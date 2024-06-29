@@ -1,4 +1,4 @@
-package com.androidchatapp
+package com.cmschats
 
 import android.os.Build
 import android.os.Bundle

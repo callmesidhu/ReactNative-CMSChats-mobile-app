@@ -1,4 +1,4 @@
-rootProject.name = 'AndroidChatApp'
+rootProject.name = 'CMSChats'
 
 dependencyResolutionManagement {
   versionCatalogs {
