@@ -63,7 +63,7 @@ export default function Home() {
                 source={{uri:profile?.imageUrl}}
                 placeholder={{ blurhash }}
                 contentFit="cover"
-                transition={700}
+                transition={1000}
               />
             </MenuTrigger>
             <MenuOptions>

@@ -4,13 +4,18 @@
     "slug": "CMS-Chats",
     "version": "1.0.0",
     "splash": {
-    "image": "./assets/splash.png",
-    "backgroundColor": "#111111"
-     },
+      "image": "./assets/splash.png",
+      "backgroundColor": "#111111"
+    },
     "icon": "./assets/AppIcon.png",
     "plugins": [
       "expo-video",
       "expo-font"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "50bc626b-cab6-4e98-8871-03314ceb36ae"
+      }
+    }
   }
 }

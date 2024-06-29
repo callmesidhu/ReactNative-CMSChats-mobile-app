@@ -50,7 +50,7 @@ export default function Profile() {
                     source={{uri:profile?.imageUrl}}
                     placeholder={{ blurhash }}
                     contentFit="cover"
-                    transition={5}
+                    transition={500}
                   />
           <View className='mb-6 w-[85%]'>
                     <View className='flex-row mb-2 items-end'> 
