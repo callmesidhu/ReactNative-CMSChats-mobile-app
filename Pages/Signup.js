@@ -180,7 +180,7 @@ function SignUp() {
           </Animated.View>
           <View className='justify-center flex-row'>
             <Text>I already have an account,</Text>
-            <TouchableOpacity onPress={() => navigation.navigate('Loader')}>
+            <TouchableOpacity onPress={() => navigation.navigate('LoginPage')}>
               <Text className='text-sky-600'> Login </Text>
             </TouchableOpacity>
           </View>
