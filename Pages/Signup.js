@@ -73,7 +73,6 @@ function SignUp() {
             addDoc(usersCollection, {
               name,
               email,
-              password: spassword,
               imageUrl: downloadURL,
               userId: result.user.uid,
               createdAt: new Date().toDateString(), // Fixed date format method
