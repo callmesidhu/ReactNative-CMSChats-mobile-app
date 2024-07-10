@@ -8,7 +8,7 @@ import { blurhash } from '../Context/assests';
 import MessageSection from '../Components/MessageSection';
 import { useAuth } from '../Context/authContext';
 import { getRoomId } from '../Context/getRoomId';
-import { addDoc, collection, doc, FieldValue, getDocs, onSnapshot, orderBy, query, serverTimestamp, setDoc, Timestamp, where } from 'firebase/firestore';
+import { addDoc, collection, doc, getDocs, onSnapshot, orderBy, query, serverTimestamp, setDoc, Timestamp, where } from 'firebase/firestore';
 import { db, usersRef } from '../firebase/config';
 import Animated, { SlideInDown, SlideInRight } from 'react-native-reanimated';
 
@@ -89,6 +89,8 @@ export default function Chats({ route }) {
     } catch (err) {
       console.log('Message error:', err.message);
     }
+
+
   };
 
 

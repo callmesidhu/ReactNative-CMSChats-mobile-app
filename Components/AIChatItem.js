@@ -31,7 +31,7 @@ import LottieView from 'lottie-react-native';
                     
                   <Text style={{fontSize: heightPercentageToDP(1.8)}} className="font-semibold text-neutral-800">Android Kunjappy</Text>
                   <Text style={{fontSize: heightPercentageToDP(1.6)}} className="font-medium text-neutral-500">
-                  &nbsp;&nbsp;Chat with our new AI
+                  &nbsp;&nbsp;Chat with our AI
                 </Text>
                 </View>
                   <LottieView
