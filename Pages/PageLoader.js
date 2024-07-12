@@ -1,8 +1,9 @@
-import { View, Text, ActivityIndicator } from 'react-native';
+import { View, Text, ActivityIndicator} from 'react-native';
 import React, { useEffect, useContext, useRef } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { AuthContext } from '../Context/authContext';
 import LottieView from 'lottie-react-native';
+
 
 
 

@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, Alert } from 'react-native';
+import React, { useState, useEffect, useRef } from 'react';
+import { View, Text, Alert, TouchableOpacity } from 'react-native';
 import { Image } from 'expo-image';
 import { Menu, MenuOptions, MenuOption, MenuTrigger } from 'react-native-popup-menu';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
@@ -12,11 +12,13 @@ import { usersRef } from '../firebase/config';
 import { useNavigation } from '@react-navigation/native';
 import Animated, { BounceIn, FadeInDown, FadeInRight, FadeInUp, LightSpeedInRight, SlideInUp } from 'react-native-reanimated';
 import AIChatItem from '../Components/AIChatItem';
+import LottieView from 'lottie-react-native';
 
 
 export default function Home() {
   const { user,logout } = useAuth();
   const navigation = useNavigation();
+  const animation = useRef(null);
  
   const handleLogout = async () => {
     try {
@@ -85,6 +87,15 @@ export default function Home() {
       </Animated.View>
     <AIChatItem/>
     <ChatPreview profile={profile}/>
+    
+    
+    <View className='bottom-4 right-4 aspect-square w-16 rounded-full absolute items-center justify-center'>
+    <TouchableOpacity onPress={() => navigation.navigate('WorldChatPage')}>
+    <LottieView className='w-14 aspect-square' ref={animation} source={require('../Resources/worldChatLogo.json')} autoPlay loop ></LottieView>
+    </TouchableOpacity>
+    </View>
+    
+
     </View>
   );
 }

@@ -63,7 +63,7 @@ export default function Profile() {
           </View>
           </Animated.View>
          </View>
-         <Text onPress={() => openURL('https://www.instagram.com/callmesidhu__/')} className='text-center font-semibold text-white mb-4'> &copy; V1.1 Developer : callmesidhu </Text>
+         <Text onPress={() => openURL('https://www.instagram.com/callmesidhu__/')} className='text-center font-semibold text-white mb-4'> &copy; V2.1 Developer : callmesidhu </Text>
         </View>
   )
 }

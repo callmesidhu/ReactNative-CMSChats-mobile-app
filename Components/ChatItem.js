@@ -7,9 +7,21 @@ import { collection, doc, getDocs, onSnapshot, orderBy, query } from 'firebase/f
 import { getRoomId } from '../Context/getRoomId';
 import { db } from '../firebase/config';
 import { useAuth } from '../Context/authContext';
+import * as Device from 'expo-device'
+import * as Notifications from 'expo-notifications';
     
  export default function ChatItem({ profile, item, navigation }) { 
-
+/*
+  Notifications.setNotificationHandler({
+    handleNotification: async () => ({
+      shouldShowAlert: true,
+      shouldPlaySound: false,
+      shouldSetBadge: false,
+    }),
+  });
+  */
+  
+//below is lastmessage section and above is notification section
       const [lastMessage ,setLastMessage]= useState(undefined);
       const {user} = useAuth();
     
@@ -24,6 +36,8 @@ import { useAuth } from '../Context/authContext';
                   return doc.data();
               });
               setLastMessage(allMessages[0]);
+
+              
               
         })
         
@@ -59,8 +73,6 @@ import { useAuth } from '../Context/authContext';
            return "  Say Hi 👋"
         }
       }
-
- 
   
   
         return ( 

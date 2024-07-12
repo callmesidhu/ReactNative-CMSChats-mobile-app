@@ -11,6 +11,8 @@ import { AuthContextProvider } from './Context/authContext';
 import Chats from './Pages/Chats';
 import Profile from './Pages/Profile'
 import AI from './Pages/AI';
+import WorldChat from './Pages/WorldChat';
+
 
 
 const Stack = createStackNavigator();
@@ -28,6 +30,7 @@ const App = () => {
             <Stack.Screen name="ChatPage" component={Chats} />
             <Stack.Screen name="ProfilePage" component={Profile} />
             <Stack.Screen name="AIPage" component={AI} />
+            <Stack.Screen name="WorldChatPage" component={WorldChat} />
           </Stack.Navigator>
         </NavigationContainer>
       </MenuProvider>
