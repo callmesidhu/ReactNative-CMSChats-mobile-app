@@ -112,7 +112,7 @@ export default function AI() {
             contentContainerStyle={styles.chatContainer}
           />
           {loading && 
-            <View className='flex-1 justify-center items-center'>
+            <View className='mb-3 items-center'>
             <LottieView className='w-28 aspect-square' ref={animation} source={require('../Resources/loaderAnimation.json')} autoPlay loop ></LottieView>
            </View>}
           {error && <Text className='text-rose-800'>{error}</Text>}
