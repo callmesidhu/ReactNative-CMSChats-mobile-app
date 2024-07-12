@@ -30,7 +30,7 @@ export default function ChatPreview({profile}) {
           },[user?.uid])
 
   return (
-    <Animated.View entering={SlideInDown.delay(2000).duration(1000)} className='flex-1 bg-white pl-3 pt-3'>
+    <Animated.View entering={SlideInDown.delay(1000).duration(1000)} className='flex-1 bg-white pl-3 pt-3'>
       <StatusBar style='light'/>
         {
           users.length>0? (

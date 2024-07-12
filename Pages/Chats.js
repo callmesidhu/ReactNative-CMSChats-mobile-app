@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
 import { heightPercentageToDP } from 'react-native-responsive-screen';
 import { Image } from 'expo-image';
-import { blurhash } from '../Context/assests';
+import { blurhash } from '../Context/assets';
 import MessageSection from '../Components/MessageSection';
 import { useAuth } from '../Context/authContext';
 import { getRoomId } from '../Context/getRoomId';

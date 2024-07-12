@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState }  from 'react'; 
 import{ ScrollView, StyleSheet, Text, TouchableOpacity, View} from 'react-native'; 
-import { blurhash, formatDate } from '../Context/assests';
+import { blurhash, formatDate } from '../Context/assets';
 import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen';
 import { Image } from 'expo-image';
 import { collection, doc, getDocs, onSnapshot, orderBy, query } from 'firebase/firestore';

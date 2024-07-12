@@ -5,7 +5,7 @@ import Animated, { FadeInDown, FadeInUp } from 'react-native-reanimated';
 import { useNavigation } from '@react-navigation/native';
 import * as ImagePicker from 'expo-image-picker';
 import { auth, getFirestore} from '../firebase/config'; // Adjust the path if necessary
-import { blurhash as bh } from '../Context/assests';
+import { blurhash as bh } from '../Context/assets';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { collection, addDoc } from 'firebase/firestore';

@@ -6,7 +6,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useAuth } from '../Context/authContext';
 import ChatPreview from '../Components/ChatPreview';
-import { blurhash } from '../Context/assests';
+import { blurhash } from '../Context/assets';
 import { getDocs, query, where } from 'firebase/firestore';
 import { usersRef } from '../firebase/config';
 import { useNavigation } from '@react-navigation/native';
@@ -52,7 +52,7 @@ export default function Home() {
 
   return (
     <View className='flex-1 bg-white'>
-      <Animated.View entering={SlideInUp.delay(200).duration(2000)} className='justify-between flex-row bg-sky-600 w-[100%] rounded-b-3xl h-24 px-5 items-center pt-6'>
+      <Animated.View entering={SlideInUp.delay(200).duration(1500)} className='justify-between flex-row bg-sky-600 w-[100%] rounded-b-3xl h-24 px-5 items-center pt-6'>
         <Text className='text-2xl text-white font-medium'>Chats</Text>
         <View>
           <Menu>

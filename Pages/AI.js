@@ -1,90 +1,87 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { View, Text, TouchableOpacity, TextInput } from 'react-native';
+import React, { useRef, useState } from 'react';
+import { View, Text, TouchableOpacity, TextInput, FlatList, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
 import { heightPercentageToDP } from 'react-native-responsive-screen';
 import { Image } from 'expo-image';
-import { blurhash } from '../Context/assests';
-import { useAuth } from '../Context/authContext';
-import { getRoomId } from '../Context/getRoomId';
-import { addDoc, collection, doc, getDocs, onSnapshot, orderBy, query, serverTimestamp, setDoc, Timestamp, where } from 'firebase/firestore';
-import { db, usersRef } from '../firebase/config';
+import { blurhash } from '../Context/assets';
 import Animated, { SlideInDown, SlideInRight } from 'react-native-reanimated';
-import AISection from '../Components/AISection';
+import axios from 'axios';
+import { speak, isSpeakingAsync, stop } from 'expo-speech'
+import { API_KEY } from '../Context/assets';
+import AIInteraction from '../Components/AIInteraction';
+import { ActivityIndicator } from 'react-native';
+import LottieView from 'lottie-react-native';
 
 export default function AI() {
   const navigation = useNavigation();
-  const itemId = 'AIBot';
-  const { user } = useAuth(); // login
-  const [messages, setMessages] = useState([]);
-  const [profile, setProfile] = useState(['']);
-  const textRef = useRef('');
-  const inputRef = useRef(null);
-  const [question, setQuestion] = useState('');
+  const [chat, setChat] = useState([]);
+  const [userInput, setUserInput] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [isSpeaking, setIsSpeaking] = useState(false);
+  const [error, setError] = useState(null);
+  const animation = useRef(null);
 
-  const getUser = async () => {
-    const q = query(usersRef, where('userId', '==', user?.uid));
-    const querySnapshot = await getDocs(q);
-    let data = [];
-    querySnapshot.forEach(doc => {
-      data.push({ ...doc.data() });
-    });
-    setProfile(data[0]);
-  };
+  const handleUserInput = async () =>{
+    let updatedChat = [
+      ...chat,
+      {
+        role: 'user',
+        parts: [{text: userInput}],
+      },
+    ];
 
-  useEffect(() => {
-    if (user?.uid) {
-      getUser();
-    }
-  }, [user?.uid]);
+    setLoading(true);
 
-  useEffect(() => {
-    createRoomIfNotExists();
-    let roomId = getRoomId(user?.uid, itemId);
-    const docRef = doc(db, 'rooms', roomId);
-    const messageRef = collection(docRef, 'messages');
-    const q = query(messageRef, orderBy('createdAt', 'asc'));
+    try{
+      const response = await axios.post(
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${API_KEY}`,
+        {
+          contents : updatedChat,
+        }
+      );
+      console.log("Gemini ",response.data);
+      const modelResponse = response.data?.candidates?.[0]?.content?.parts?.text || "";
+      if(modelResponse){
+        const updatedChatWithModel = [
+          ...updatedChat,
+          {
+            role : "model",
+            parts : [{ text: modelResponse }],
+          },
+        ];
 
-    let unsubscribe = onSnapshot(q, (snapshot) => {
-      let allMessages = snapshot.docs.map(doc => doc.data());
-      setMessages([...allMessages]);
-    });
-
-    return unsubscribe;
-  }, []);
-
-  const createRoomIfNotExists = async () => {
-    let roomId = getRoomId(itemId, user?.uid);
-    await setDoc(doc(db, 'rooms', roomId), {
-      roomId,
-      createdAt: Timestamp.fromDate(new Date())
-    });
-  };
-
-  const handleSendMessage = async () => {
-    const message = textRef.current.trim();
-    if (!message) return;
-    try {
-      const roomId = getRoomId(itemId, user?.uid);
-      const docRef = doc(db, 'rooms', roomId);
-      const messageRef = collection(docRef, 'messages');
-      textRef.current = "";
-      if (inputRef) {
-        inputRef?.current?.clear();
+          setChat(updatedChatWithModel);
+          setUserInput("");
       }
-      await addDoc(messageRef, {
-        userId: user?.uid,
-        text: message,
-        profileUrl: profile?.imageUrl,
-        senderName: profile?.name,
-        createdAt: serverTimestamp(),
-      });
-      setQuestion(message);  // Set the question after message is successfully sent
-    } catch (err) {
-      console.log('Message error:', err.message);
+    }catch(error){
+          console.error("Error calling API: ", error);
+          console.error("Error response: ", error.response);
+          setError("An error occurred. Please try again.");
+          } finally {
+            setLoading(false);
+          }
+  };
+  
+  const handleSpeech = async ( text )=>{
+    if(isSpeaking){
+      stop();
+      setIsSpeaking(false);
+    }else{
+      if(!(await isSpeakingAsync())){
+        speak(text);
+        setIsSpeaking(true);
+      }
     }
   };
-
+  const renderChatItem = ({ item }) => (
+    <AIInteraction
+      role = {item.role}
+      text = {item.parts[0].text}
+      onSpeech={()=> handleSpeech(item.parts[0].text)}
+    />
+  );
+ 
   return (
     <View className='flex-1 bg-sky-600 '>
       <View className='justify-between flex-row w-[100%] h-24 px-5 items-center pt-10'>
@@ -107,7 +104,18 @@ export default function AI() {
       </View>
       <Animated.View entering={SlideInDown.delay(0).duration(1200)} style={{ backgroundColor: '#FEFFE9' }} className=' flex-1 m-4 rounded-3xl overflow-visible'>
         <View className='flex-1  rounded-3xl'>
-          <AISection question={question} messages={messages} currentUser={user} />
+          <FlatList 
+            className=''
+            data={chat}
+            renderItem={renderChatItem}
+            keyExtractor={(item, index) => index.toString()}
+            contentContainerStyle={styles.chatContainer}
+          />
+          {loading && 
+            <View className='flex-1 justify-center items-center'>
+            <LottieView className='w-28 aspect-square' ref={animation} source={require('../Resources/loaderAnimation.json')} autoPlay loop ></LottieView>
+           </View>}
+          {error && <Text className='text-rose-800'>{error}</Text>}
         </View>
       </Animated.View>
       <Animated.View entering={SlideInDown.delay(600).duration(700)} style={{ marginBottom: heightPercentageToDP(1.0), marginTop: heightPercentageToDP(1.0) }}>
@@ -115,14 +123,14 @@ export default function AI() {
           <View className='flex flex-row'>
             <View className="flex-1 justify-between bg-neutral-100 border border-indigo-900 p-2 rounded-full mx-2">
               <TextInput
-                ref={inputRef}
-                onChangeText={(value) => (textRef.current = value)}
                 placeholder='Type a message...'
                 style={{ fontSize: heightPercentageToDP(2) }}
                 className='flex-1 mx-2'
+                value={userInput}
+                onChangeText={setUserInput}
               />
             </View>
-            <TouchableOpacity onPress={handleSendMessage} className="bg-sky-700 p-4 rounded-full ">
+            <TouchableOpacity onPress={handleUserInput} className="bg-sky-700 p-4 rounded-full ">
               <Icon className='' name="send" size={20} color="white" />
             </TouchableOpacity>
           </View>
@@ -130,4 +138,13 @@ export default function AI() {
       </Animated.View>
     </View>
   );
-}
+};
+
+const styles = StyleSheet.create({
+    chatContainer:{
+      flexGrow: 1,
+      justifyContent: "flex-end"
+    }
+})
+
+

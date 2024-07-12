@@ -1,7 +1,7 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen'
-import { blurhash } from '../Context/assests'
+import { blurhash } from '../Context/assets'
 import { Image } from 'expo-image'
 
 export default function MessageItem({message, currentUser}) {

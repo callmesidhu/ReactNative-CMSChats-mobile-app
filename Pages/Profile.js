@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { heightPercentageToDP } from 'react-native-responsive-screen';
-import { blurhash } from '../Context/assests';
+import { blurhash } from '../Context/assets';
 import { Image } from 'expo-image';
 import { getDocs, query, where } from 'firebase/firestore';
 import { usersRef } from '../firebase/config';
