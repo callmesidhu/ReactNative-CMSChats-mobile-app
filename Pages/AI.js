@@ -19,8 +19,10 @@ export default function AI() {
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [error, setError] = useState(null);
   const animation = useRef(null);
+  const [intro, setIntro] = useState(true)
 
   const handleUserInput = async () => {
+   
     let updatedChat = [
       ...chat,
       {
@@ -30,6 +32,7 @@ export default function AI() {
     ];
 
     setLoading(true);
+    setIntro(false);
 
     try {
       const response = await axios.post(
@@ -38,7 +41,7 @@ export default function AI() {
           contents: updatedChat,
         }
       );
-      console.log("Gemini Response: ", response.data?.candidates?.[0]?.content?.parts[0]?.text);
+    //  console.log("Response: ", response.data?.candidates?.[0]?.content?.parts[0]?.text);
       const modelResponse = response.data?.candidates?.[0]?.content?.parts[0]?.text || "";
       if (modelResponse) {
         const updatedChatWithModel = [
@@ -102,14 +105,24 @@ export default function AI() {
         </Animated.View>
       </View>
       <Animated.View entering={SlideInDown.delay(0).duration(1200)} style={{ backgroundColor: '#FEFFE9' }} className=' flex-1 m-4 rounded-3xl overflow-visible'>
-        <View className='flex-1  rounded-3xl'>
-          <FlatList
+        <View className='flex-1  rounded-3xl px-5 '>
+          {intro?(
+            <View className="flex-1 justify-center items-center">
+              <LottieView className='w-64 aspect-square' ref={animation} source={require('../Resources/AIBot.json')} autoPlay loop ></LottieView>
+            <Text className='text-lg text-center font-normal'>
+                Hello👋, I am Android Kunjappy the AI🤖. How can I help you?
+            </Text>
+            </View>
+
+         ):(
+            <FlatList
             className=''
             data={chat}
             renderItem={renderChatItem}
             keyExtractor={(item, index) => index.toString()}
             contentContainerStyle={styles.chatContainer}
           />
+        )}
           {loading &&
             <View className='mb-3 items-center'>
               <LottieView className='w-28 aspect-square' ref={animation} source={require('../Resources/loaderAnimation.json')} autoPlay loop ></LottieView>
