@@ -4,11 +4,13 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
 import { heightPercentageToDP } from 'react-native-responsive-screen';
 import { Image } from 'expo-image';
+import { blurhash } from '../Context/assets';
 import Animated, { SlideInDown, SlideInRight } from 'react-native-reanimated';
 import axios from 'axios';
-import { speak, isSpeakingAsync, stop } from 'expo-speech';
-import { API_KEY, blurhash } from '../Context/assets';
+import { speak, isSpeakingAsync, stop } from 'expo-speech'
+import { API_KEY } from '../Context/assets';
 import AIInteraction from '../Components/AIInteraction';
+import { ActivityIndicator } from 'react-native';
 import LottieView from 'lottie-react-native';
 
 export default function AI() {
@@ -20,67 +22,66 @@ export default function AI() {
   const [error, setError] = useState(null);
   const animation = useRef(null);
 
-  const handleUserInput = async () => {
+  const handleUserInput = async () =>{
     let updatedChat = [
       ...chat,
       {
         role: 'user',
-        parts: [{ text: userInput }],
+        parts: [{text: userInput}],
       },
     ];
 
     setLoading(true);
 
-    try {
+    try{
       const response = await axios.post(
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${API_KEY}`,
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro-latest:generateContent?key=${API_KEY}`,
         {
-          contents: updatedChat,
+          contents : updatedChat,
         }
       );
-      console.log("Gemini Response: ", response.data?.candidates?.[0]?.content?.parts[0]?.text);
-      const modelResponse = response.data?.candidates?.[0]?.content?.parts[0]?.text || "";
-      if (modelResponse) {
+      console.log("Gemini ",response.data);
+      const modelResponse = response.data?.candidates?.[0]?.content?.parts?.text || "";
+      if(modelResponse){
         const updatedChatWithModel = [
           ...updatedChat,
           {
-            role: "model",
-            parts: [{ text: modelResponse }],
+            role : "model",
+            parts : [{ text: modelResponse }],
           },
         ];
 
-        setChat(updatedChatWithModel);
-        setUserInput("");
+          setChat(updatedChatWithModel);
+          setUserInput("");
       }
-    } catch (error) {
-      console.error("Error calling API: ", error);
-      console.error("Error response: ", error.response);
-      setError("An error occurred. Please try again.");
-    } finally {
-      setLoading(false);
-    }
+    }catch(error){
+          console.error("Error calling API: ", error);
+          console.error("Error response: ", error.response);
+          setError("An error occurred. Please try again.");
+          } finally {
+            setLoading(false);
+          }
   };
-
-  const handleSpeech = async (text) => {
-    if (isSpeaking) {
+  
+  const handleSpeech = async ( text )=>{
+    if(isSpeaking){
       stop();
       setIsSpeaking(false);
-    } else {
-      if (!(await isSpeakingAsync())) {
+    }else{
+      if(!(await isSpeakingAsync())){
         speak(text);
         setIsSpeaking(true);
       }
     }
   };
-
   const renderChatItem = ({ item }) => (
     <AIInteraction
-      role={item.role}
-      text={item.parts[0].text}
-      onSpeech={() => handleSpeech(item.parts[0].text)}
+      role = {item.role}
+      text = {item.parts[0].text}
+      onSpeech={()=> handleSpeech(item.parts[0].text)}
     />
   );
-
+ 
   return (
     <View className='flex-1 bg-sky-600 '>
       <View className='justify-between flex-row w-[100%] h-24 px-5 items-center pt-10'>
@@ -103,17 +104,17 @@ export default function AI() {
       </View>
       <Animated.View entering={SlideInDown.delay(0).duration(1200)} style={{ backgroundColor: '#FEFFE9' }} className=' flex-1 m-4 rounded-3xl overflow-visible'>
         <View className='flex-1  rounded-3xl'>
-          <FlatList
+          <FlatList 
             className=''
             data={chat}
             renderItem={renderChatItem}
             keyExtractor={(item, index) => index.toString()}
             contentContainerStyle={styles.chatContainer}
           />
-          {loading &&
+          {loading && 
             <View className='mb-3 items-center'>
-              <LottieView className='w-28 aspect-square' ref={animation} source={require('../Resources/loaderAnimation.json')} autoPlay loop ></LottieView>
-            </View>}
+            <LottieView className='w-28 aspect-square' ref={animation} source={require('../Resources/loaderAnimation.json')} autoPlay loop ></LottieView>
+           </View>}
           {error && <Text className='text-rose-800'>{error}</Text>}
         </View>
       </Animated.View>
@@ -140,8 +141,10 @@ export default function AI() {
 };
 
 const styles = StyleSheet.create({
-  chatContainer: {
-    flexGrow: 1,
-    justifyContent: "flex-end"
-  }
-});
+    chatContainer:{
+      flexGrow: 1,
+      justifyContent: "flex-end"
+    }
+})
+
+
