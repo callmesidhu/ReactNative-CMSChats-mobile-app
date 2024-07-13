@@ -1,2 +1,2 @@
-# Frontend:- react native expo + nativewind 
-# Backend :- Firebase(`Authentication`, `Firestore`, `Storage`) + Gemini API
+# Frontend:- `react native expo` + `nativewind` 
+# Backend :- `Firebase` + `Gemini API`
