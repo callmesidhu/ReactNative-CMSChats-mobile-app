@@ -10,13 +10,26 @@
     "icon": "./assets/AppIcon.png",
     "plugins": [
       "expo-video",
-      "expo-font"
+      "expo-font",
+      "expo-router"
     ],
     "extra": {
       "eas": {
         "projectId": "bb864e40-82d2-4db1-acc3-4560e0664cf8"
       }
     },
-    "owner": "callmesidhu"
+    "owner": "callmesidhu",
+    "updates": {
+      "url": "https://u.expo.dev/bb864e40-82d2-4db1-acc3-4560e0664cf8"
+    },
+    "android": {
+      "runtimeVersion": {
+        "policy": "appVersion"
+      },
+      "package": "com.callmesidhu.cmschats"
+    },
+    "ios": {
+      "runtimeVersion": "1.0.0"
+    }
   }
 }
