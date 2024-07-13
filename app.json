@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "CMS Chats",
-    "slug": "CMS-Chats",
+    "slug": "cms-chats",
     "version": "1.0.0",
     "splash": {
       "image": "./assets/splash.png",
@@ -14,8 +14,9 @@
     ],
     "extra": {
       "eas": {
-        "projectId": "50bc626b-cab6-4e98-8871-03314ceb36ae"
+        "projectId": "bb864e40-82d2-4db1-acc3-4560e0664cf8"
       }
-    }
+    },
+    "owner": "callmesidhu"
   }
 }
